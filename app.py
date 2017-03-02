@@ -10,7 +10,7 @@ from telepot.namedtuple import ReplyKeyboardMarkup, KeyboardButton, ReplyKeyboar
 !!!Python3.5 above is required!!!
 """
 
-TOKEN = '' #Insert Your Bot Tokens Here
+TOKEN = '' #Insert Your Bot Token Here
 
 
 cmax=999
