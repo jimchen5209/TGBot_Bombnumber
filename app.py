@@ -10,7 +10,7 @@ from telepot.namedtuple import ReplyKeyboardMarkup, KeyboardButton, ReplyKeyboar
 !!!Python3.5 above is required!!!
 """
 
-TOKEN = '' #Insert Your Bot Token Here
+TOKEN = '' #Insert Your Bot Tokens Here
 
 
 cmax=999
@@ -164,7 +164,8 @@ class Player(telepot.aio.helper.ChatHandler):
                 hint = self._hint(self._answer, guess,self._cmin,self._cmax)
                 await self.sender.sendMessage(hint)
             else:
-                await self.sender.sendMessage('Boom!')
+                await self.sender.sendDocument('CgADBQADAQADgf7QVUjF22TW3F20Ag', caption='Boom!')
+                #await self.sender.sendMessage('Boom!')
                 await self.sender.sendMessage('遊戲結束，您引爆了炸彈')
                 await self.sender.sendMessage('/start_game')
                 print('[Info]',msg['chat']['username'],'(',chat_id, ') has gotten the bomb and exploded.\n[Info] Game ended.')
@@ -209,7 +210,8 @@ class Player(telepot.aio.helper.ChatHandler):
                         markup = ForceReply()
                         await self.sender.sendMessage(hint,reply_to_message_id= msg['message_id'], reply_markup=markup)
                     else:
-                        await self.sender.sendMessage('Boom!',reply_to_message_id= msg['message_id'])
+                        await self.sender.sendDocument('CgADBQADAQADgf7QVUjF22TW3F20Ag', caption='Boom!',reply_to_message_id= msg['message_id'])
+                        #await self.sender.sendMessage('Boom!',reply_to_message_id= msg['message_id'])
                         await self.sender.sendMessage('遊戲結束，您引爆了炸彈',reply_to_message_id= msg['message_id'])
                         await self.sender.sendMessage('/start_game', reply_markup=None)
                         print('[Info]',msg['from']['username'],'(',msg['from']['id'], ') in',msg['chat']['title'],'(',chat_id, ') has gotten the bomb and exploded.\n[Info] Game ended.')
