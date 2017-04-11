@@ -52,17 +52,32 @@ class Player(telepot.aio.helper.ChatHandler):
                 reply_to = initial_msg['reply_to_message']['from']['id']
             except:
                 if content_type == 'text':
-                    print('[Info][',initial_msg['message_id'],']',initial_msg['chat']['username'],'(',chat_id, ') :', initial_msg['text'])
+                    try:
+                        print('[Info][',initial_msg['message_id'],']',initial_msg['chat']['username'],'(',chat_id, ') :', initial_msg['text'])
+                    except:
+                        print('[Info][',initial_msg['message_id'],']',chat_id, ' :', initial_msg['text'])
                 else:
-                    print('[Info][',initial_msg['message_id'],']',initial_msg['chat']['username'],'(',chat_id, ') sent a ', content_type)
+                    try:
+                        print('[Info][',initial_msg['message_id'],']',initial_msg['chat']['username'],'(',chat_id, ') sent a ', content_type)
+                    except:
+                        print('[Info][',initial_msg['message_id'],']',chat_id, ' sent a ', content_type)
             else:
                 if content_type == 'text':
-                    print('[Info][',initial_msg['message_id'],'](Reply)',initial_msg['chat']['username'],'(',chat_id, ') :', initial_msg['text'])
+                    try:
+                        print('[Info][',initial_msg['message_id'],'](Reply)',initial_msg['chat']['username'],'(',chat_id, ') :', initial_msg['text'])
+                    except:
+                        print('[Info][',initial_msg['message_id'],'](Reply)',chat_id, ' :', initial_msg['text'])
                 else:
-                    print('[Info][',initial_msg['message_id'],'](Reply)',initial_msg['chat']['username'],'(',chat_id, ') sent a ', content_type)
+                    try:
+                        print('[Info][',initial_msg['message_id'],'](Reply)',initial_msg['chat']['username'],'(',chat_id, ') sent a ', content_type)
+                    except:
+                        print('[Info][',initial_msg['message_id'],'](Reply)',chat_id, ' sent a ', content_type)
             if content_type == 'text':
                 if initial_msg['text'] == '/start_game':
-                    print('[Info]',initial_msg['chat']['username'],'(',chat_id, ') has started a game with the bomb', self._answer)
+                    try:
+                        print('[Info]',initial_msg['chat']['username'],'(',chat_id, ') has started a game with the bomb', self._answer)
+                    except:
+                        print('[Info]',chat_id, ' has started a game with the bomb', self._answer)
                     await self.sender.sendMessage('遊戲開始！請猜一個範圍內的數字')
                     await self.sender.sendMessage('當猜中數字時就會爆炸，你只有20秒')
                     await self.sender.sendMessage(str(self._cmin)+' - '+str(self._cmax))
@@ -88,55 +103,148 @@ class Player(telepot.aio.helper.ChatHandler):
                 reply_to = initial_msg['reply_to_message']['from']['id']
             except:
                 if content_type == 'text':
-                    print('[Info][',initial_msg['message_id'],']',initial_msg['from']['username'],'(',initial_msg['from']['id'], ') in',initial_msg['chat']['title'],'(',chat_id, ') :', initial_msg['text'])
+                    try:
+                        print('[Info][',initial_msg['message_id'],']',initial_msg['from']['username'],'(',initial_msg['from']['id'], ') in',initial_msg['chat']['title'],'(',chat_id, ') :', initial_msg['text'])
+                    except:
+                        print('[Info][',initial_msg['message_id'],']',initial_msg['from']['id'], ' in',initial_msg['chat']['title'],'(',chat_id, ') :', initial_msg['text'])
                 elif content_type == 'new_chat_member':
                     if initial_msg['new_chat_member']['id'] == bot_me['id']:
-                        print('[Info][',initial_msg['message_id'],'] I have been joined a ', chat_type,':',initial_msg['chat']['title'],'(',chat_id,') by',initial_msg['from']['username'],'(',initial_msg['from']['id'],')')
+                        try:
+                            print('[Info][',initial_msg['message_id'],'] I have been joined a ', chat_type,':',initial_msg['chat']['title'],'(',chat_id,') by',initial_msg['from']['username'],'(',initial_msg['from']['id'],')')
+                        except:
+                            print('[Info][',initial_msg['message_id'],'] I have been joined a ', chat_type,':',initial_msg['chat']['title'],'(',chat_id,') by',initial_msg['from']['id'])
                     else:
-                        print('[Info][',initial_msg['message_id'],'] ',initial_msg['new_chat_member']['username'],' joined a ', chat_type,':',initial_msg['chat']['title'],'(',chat_id,')')
+                        try:
+                            print('[Info][',initial_msg['message_id'],'] ',initial_msg['new_chat_member']['username'],' joined a ', chat_type,':',initial_msg['chat']['title'],'(',chat_id,')')
+                        except:
+                            print('[Info][',initial_msg['message_id'],'] ',initial_msg['new_chat_member']['id'],' joined a ', chat_type,':',initial_msg['chat']['title'],'(',chat_id,')')
                 elif content_type == 'left_chat_member':
                     if initial_msg['left_chat_member']['id'] == bot_me['id']:
-                        print('[Info][',initial_msg['message_id'],'] I have been kicked from ', chat_type,':',initial_msg['chat']['title'],'(',chat_id,') by',initial_msg['from']['username'],'(',initial_msg['from']['id'],')')
+                        try:
+                            print('[Info][',initial_msg['message_id'],'] I have been kicked from ', chat_type,':',initial_msg['chat']['title'],'(',chat_id,') by',initial_msg['from']['username'],'(',initial_msg['from']['id'],')')
+                        except:
+                            print('[Info][',initial_msg['message_id'],'] I have been kicked from ', chat_type,':',initial_msg['chat']['title'],'(',chat_id,') by',initial_msg['from']['id'])
                     else:
-                        print('[Info][',initial_msg['message_id'],'] ',initial_msg['left_chat_member']['username'],' left the ', chat_type,':',initial_msg['chat']['title'],'(',chat_id,')')
+                        try:
+                            print('[Info][',initial_msg['message_id'],'] ',initial_msg['left_chat_member']['username'],' left the ', chat_type,':',initial_msg['chat']['title'],'(',chat_id,')')
+                        except:
+                            print('[Info][',initial_msg['message_id'],'] ',initial_msg['left_chat_member']['id'],' left the ', chat_type,':',initial_msg['chat']['title'],'(',chat_id,')')
                 else:
-                    print('[Info][',initial_msg['message_id'],']',initial_msg['from']['username'],'(',initial_msg['from']['id'], ') in',initial_msg['chat']['title'],'(',chat_id, ') sent a ', content_type)
+                    try:
+                        print('[Info][',initial_msg['message_id'],']',initial_msg['from']['username'],'(',initial_msg['from']['id'], ') in',initial_msg['chat']['title'],'(',chat_id, ') sent a ', content_type)
+                    except:
+                        print('[Info][',initial_msg['message_id'],']', initial_msg['from']['id'], ' in',initial_msg['chat']['title'],'(',chat_id, ') sent a ', content_type)
             else:
                 if reply_to == bot_me['id']:
                     if content_type == 'text':
-                        print('[Info][',initial_msg['message_id'],'] (Reply to me)',initial_msg['from']['username'],'(',initial_msg['from']['id'], ') in',initial_msg['chat']['title'],'(',chat_id, ') :',initial_msg['text'])
+                        try:
+                            print('[Info][',initial_msg['message_id'],'] (Reply to me)',initial_msg['from']['username'],'(',initial_msg['from']['id'], ') in',initial_msg['chat']['title'],'(',chat_id, ') :',initial_msg['text'])
+                        except:
+                            print('[Info][',initial_msg['message_id'],'] (Reply to me)',initial_msg['from']['id'], ' in',initial_msg['chat']['title'],'(',chat_id, ') :',initial_msg['text'])
                     elif content_type == 'new_chat_member':
                         if initial_msg['new_chat_member']['id'] == bot_me['id']:
-                            print('[Info][',initial_msg['message_id'],'] (Reply to me) I have been joined a ', chat_type,':',initial_msg['chat']['title'],'(',chat_id,') by',initial_msg['from']['username'],'(',initial_msg['from']['id'],')')
+                            try:
+                                print('[Info][',initial_msg['message_id'],'] (Reply to me) I have been joined a ', chat_type,':',initial_msg['chat']['title'],'(',chat_id,') by',initial_msg['from']['username'],'(',initial_msg['from']['id'],')')
+                            except:
+                                print('[Info][',initial_msg['message_id'],'] (Reply to me) I have been joined a ', chat_type,':',initial_msg['chat']['title'],'(',chat_id,') by',initial_msg['from']['id'])
                         else:
-                            print('[Info][',initial_msg['message_id'],'] (Reply to me)',initial_msg['new_chat_member']['username'],' joined a ', chat_type,':',initial_msg['chat']['title'],'(',chat_id,')')
+                            try:
+                                print('[Info][',initial_msg['message_id'],'] (Reply to me)',initial_msg['new_chat_member']['username'],' joined a ', chat_type,':',initial_msg['chat']['title'],'(',chat_id,')')
+                            except:
+                                print('[Info][',initial_msg['message_id'],'] (Reply to me) ',initial_msg['new_chat_member']['id'],' joined a ', chat_type,':',initial_msg['chat']['title'],'(',chat_id,')')
                     elif content_type == 'left_chat_member':
                         if initial_msg['left_chat_member']['id'] == bot_me['id']:
-                            print('[Info][',initial_msg['message_id'],'] (Reply to me) I have been kicked from ', chat_type,':',initial_msg['chat']['title'],'(',chat_id,') by',initial_msg['from']['username'],'(',initial_msg['from']['id'],')')
+                            try:
+                                print('[Info][',initial_msg['message_id'],'] (Reply to me) I have been kicked from ', chat_type,':',initial_msg['chat']['title'],'(',chat_id,') by',initial_msg['from']['username'],'(',initial_msg['from']['id'],')')
+                            except:
+                                print('[Info][',initial_msg['message_id'],'] (Reply to me) I have been kicked from ', chat_type,':',initial_msg['chat']['title'],'(',chat_id,') by',initial_msg['from']['id'])
                         else:
-                            print('[Info][',initial_msg['message_id'],'] (Reply to me) ',initial_msg['left_chat_member']['username'],' left the ', chat_type,':',initial_msg['chat']['title'],'(',chat_id,')')
+                            try:
+                                print('[Info][',initial_msg['message_id'],'] (Reply to me) ',initial_msg['left_chat_member']['username'],' left the ', chat_type,':',initial_msg['chat']['title'],'(',chat_id,')')
+                            except:
+                                print('[Info][',initial_msg['message_id'],'] (Reply to me) ',initial_msg['left_chat_member']['id'],' left the ', chat_type,':',initial_msg['chat']['title'],'(',chat_id,')')
                     else:
-                        print('[Info][',initial_msg['message_id'],'] (Reply to me)',initial_msg['from']['username'],'(',initial_msg['from']['id'], ') in',initial_msg['chat']['title'],'(',chat_id, ')sent a ', content_type)
+                        try:
+                            print('[Info][',initial_msg['message_id'],'] (Reply to me)',initial_msg['from']['username'],'(',initial_msg['from']['id'], ') in',initial_msg['chat']['title'],'(',chat_id, ')sent a ', content_type)
+                        except:
+                            print('[Info][',initial_msg['message_id'],'] (Reply to me)',initial_msg['from']['id'], ' in',initial_msg['chat']['title'],'(',chat_id, ')sent a ', content_type)
                 else:
                     if content_type == 'text':
-                        print('[Info][',initial_msg['message_id'],'] (Reply to ',initial_msg['reply_to_message']['from']['username'],')',initial_msg['from']['username'],'(',initial_msg['from']['id'], ') in',initial_msg['chat']['title'],'(',chat_id, ') :',initial_msg['text'])
+                        try:
+                            print('[Info][',initial_msg['message_id'],'] (Reply to ',initial_msg['reply_to_message']['from']['username'],')',initial_msg['from']['username'],'(',initial_msg['from']['id'], ') in',initial_msg['chat']['title'],'(',chat_id, ') :',initial_msg['text'])
+                        except:
+                            try:
+                                print('[Info][',initial_msg['message_id'],'] (Reply to ',initial_msg['reply_to_message']['from']['id'],')',initial_msg['from']['username'],'(',initial_msg['from']['id'], ') in',initial_msg['chat']['title'],'(',chat_id, ') :',initial_msg['text'])
+                            except:
+                                try:
+                                    print('[Info][',initial_msg['message_id'],'] (Reply to ',initial_msg['reply_to_message']['from']['username'],')',initial_msg['from']['id'], ' in',initial_msg['chat']['title'],'(',chat_id, ') :',initial_msg['text'])
+                                except:
+                                    print('[Info][',initial_msg['message_id'],'] (Reply to ',initial_msg['reply_to_message']['from']['id'],')',initial_msg['from']['id'], ' in',initial_msg['chat']['title'],'(',chat_id, ') :',initial_msg['text'])
                     elif content_type == 'new_chat_member':
                         if initial_msg['new_chat_member']['id'] == bot_me['id']:
-                            print('[Info][',initial_msg['message_id'],'] (Reply to ',initial_msg['reply_to_message']['from']['username'],') I have been joined a ', chat_type,':',initial_msg['chat']['title'],'(',chat_id,') by',initial_msg['from']['username'],'(',initial_msg['from']['id'],')')
+                            try:
+                                print('[Info][',initial_msg['message_id'],'] (Reply to ',initial_msg['reply_to_message']['from']['username'],') I have been joined a ', chat_type,':',initial_msg['chat']['title'],'(',chat_id,') by',initial_msg['from']['username'],'(',initial_msg['from']['id'],')')
+                            except:
+                                try:
+                                    print('[Info][',initial_msg['message_id'],'] (Reply to ',initial_msg['reply_to_message']['from']['id'],') I have been joined a ', chat_type,':',initial_msg['chat']['title'],'(',chat_id,') by',initial_msg['from']['username'],'(',initial_msg['from']['id'],')')
+                                except:
+                                    try:
+                                        print('[Info][',initial_msg['message_id'],'] (Reply to ',initial_msg['reply_to_message']['from']['username'],') I have been joined a ', chat_type,':',initial_msg['chat']['title'],'(',chat_id,') by',initial_msg['from']['id'])
+                                    except:
+                                        print('[Info][',initial_msg['message_id'],'] (Reply to ',initial_msg['reply_to_message']['from']['id'],') I have been joined a ', chat_type,':',initial_msg['chat']['title'],'(',chat_id,') by',initial_msg['from']['id'])
                         else:
-                            print('[Info][',initial_msg['message_id'],'] (Reply to ',initial_msg['reply_to_message']['from']['username'],') ',initial_msg['new_chat_member']['username'],' joined a ', chat_type,':',initial_msg['chat']['title'],'(',chat_id,')')
+                            try:
+                                print('[Info][',initial_msg['message_id'],'] (Reply to ',initial_msg['reply_to_message']['from']['username'],') ',initial_msg['new_chat_member']['username'],' joined a ', chat_type,':',initial_msg['chat']['title'],'(',chat_id,')')
+                            except:
+                                try:
+                                    print('[Info][',initial_msg['message_id'],'] (Reply to ',initial_msg['reply_to_message']['from']['id'],') ',initial_msg['new_chat_member']['username'],' joined a ', chat_type,':',initial_msg['chat']['title'],'(',chat_id,')')
+                                except:
+                                    try:
+                                        print('[Info][',initial_msg['message_id'],'] (Reply to ',initial_msg['reply_to_message']['from']['username'],') ',initial_msg['new_chat_member']['id'],' joined a ', chat_type,':',initial_msg['chat']['title'],'(',chat_id,')')
+                                    except:
+                                        print('[Info][',initial_msg['message_id'],'] (Reply to ',initial_msg['reply_to_message']['from']['id'],') ',initial_msg['new_chat_member']['id'],' joined a ', chat_type,':',initial_msg['chat']['title'],'(',chat_id,')')
                     elif content_type == 'left_chat_member':
                         if initial_msg['left_chat_member']['id'] == bot_me['id']:
-                            print('[Info][',initial_msg['message_id'],'] (Reply to ',initial_msg['reply_to_message']['from']['username'],') I have been kicked from ', chat_type,':',initial_msg['chat']['title'],'(',chat_id,') by',initial_msg['from']['username'],'(',initial_msg['from']['id'],')')
+                            try:
+                                print('[Info][',initial_msg['message_id'],'] (Reply to ',initial_msg['reply_to_message']['from']['username'],') I have been kicked from ', chat_type,':',initial_msg['chat']['title'],'(',chat_id,') by',initial_msg['from']['username'],'(',initial_msg['from']['id'],')')
+                            except:
+                                try:
+                                    print('[Info][',initial_msg['message_id'],'] (Reply to ',initial_msg['reply_to_message']['from']['id'],') I have been kicked from ', chat_type,':',initial_msg['chat']['title'],'(',chat_id,') by',initial_msg['from']['username'],'(',initial_msg['from']['id'],')')
+                                except:
+                                    try:
+                                        print('[Info][',initial_msg['message_id'],'] (Reply to ',initial_msg['reply_to_message']['from']['username'],') I have been kicked from ', chat_type,':',initial_msg['chat']['title'],'(',chat_id,') by',initial_msg['from']['id'])
+                                    except:
+                                        print('[Info][',initial_msg['message_id'],'] (Reply to ',initial_msg['reply_to_message']['from']['id'],') I have been kicked from ', chat_type,':',initial_msg['chat']['title'],'(',chat_id,') by',initial_msg['from']['id'])
                         else:
-                            print('[Info][',initial_msg['message_id'],'] (Reply to ',initial_msg['reply_to_message']['from']['username'],') ',initial_msg['left_chat_member']['username'],' left the ', chat_type,':',initial_msg['chat']['title'],'(',chat_id,')')
+                            try:
+                                print('[Info][',initial_msg['message_id'],'] (Reply to ',initial_msg['reply_to_message']['from']['username'],') ',initial_msg['left_chat_member']['username'],' left the ', chat_type,':',initial_msg['chat']['title'],'(',chat_id,')')
+                            except:
+                                try:
+                                    print('[Info][',initial_msg['message_id'],'] (Reply to ',initial_msg['reply_to_message']['from']['id'],') ',initial_msg['left_chat_member']['username'],' left the ', chat_type,':',initial_msg['chat']['title'],'(',chat_id,')')
+                                except:
+                                    try:
+                                        print('[Info][',initial_msg['message_id'],'] (Reply to ',initial_msg['reply_to_message']['from']['username'],') ',initial_msg['left_chat_member']['id'],' left the ', chat_type,':',initial_msg['chat']['title'],'(',chat_id,')')
+                                    except:
+                                        print('[Info][',initial_msg['message_id'],'] (Reply to ',initial_msg['reply_to_message']['from']['id'],') ',initial_msg['left_chat_member']['id'],' left the ', chat_type,':',initial_msg['chat']['title'],'(',chat_id,')')
                     else:
-                        print('[Info][',initial_msg['message_id'],'] (Reply to ',initial_msg['reply_to_message']['from']['username'],')',initial_msg['from']['username'],'(',initial_msg['from']['id'], ') in',initial_msg['chat']['title'],'(',chat_id, ')sent a ', content_type)
+                        try:
+                            print('[Info][',initial_msg['message_id'],'] (Reply to ',initial_msg['reply_to_message']['from']['username'],')',initial_msg['from']['username'],'(',initial_msg['from']['id'], ') in',initial_msg['chat']['title'],'(',chat_id, ')sent a ', content_type)
+                        except:
+                            try:
+                                print('[Info][',initial_msg['message_id'],'] (Reply to ',initial_msg['reply_to_message']['from']['id'],')',initial_msg['from']['username'],'(',initial_msg['from']['id'], ') in',initial_msg['chat']['title'],'(',chat_id, ')sent a ', content_type)
+                            except:
+                                try:
+                                    print('[Info][',initial_msg['message_id'],'] (Reply to ',initial_msg['reply_to_message']['from']['username'],')',initial_msg['from']['id'], ' in',initial_msg['chat']['title'],'(',chat_id, ')sent a ', content_type)
+                                except:
+                                    print('[Info][',initial_msg['message_id'],'] (Reply to ',initial_msg['reply_to_message']['from']['id'],')',initial_msg['from']['id'], ' in',initial_msg['chat']['title'],'(',chat_id, ')sent a ', content_type)
             if content_type == 'text':
                 
                 if initial_msg['text'] == '/start_game' or initial_msg['text'] == '/start_game@'+username:
                     #await self.sender.sendMessage('Group MultiPlayer Coming Soon!')
-                    print('[Info]',initial_msg['from']['username'],'(',initial_msg['from']['id'], ') in',initial_msg['chat']['title'],'(',chat_id, ') has started a group game with the bomb', self._answer)
+                    try:
+                        print('[Info]',initial_msg['from']['username'],'(',initial_msg['from']['id'], ') in',initial_msg['chat']['title'],'(',chat_id, ') has started a group game with the bomb', self._answer)
+                    except:
+                        print('[Info]',initial_msg['from']['id'], ' in',initial_msg['chat']['title'],'(',chat_id, ') has started a group game with the bomb', self._answer)
                     await self.sender.sendMessage('遊戲開始！請猜一個範圍內的數字',reply_to_message_id= initial_msg['message_id'])
                     await self.sender.sendMessage('當猜中數字時就會爆炸，你只有20秒')
                     markup = ForceReply()
@@ -174,20 +282,35 @@ class Player(telepot.aio.helper.ChatHandler):
                 reply_to = msg['reply_to_message']['from']['id']
             except:    
                 if content_type != 'text':
-                    print('[Info][',msg['message_id'],']',msg['chat']['username'],'(',chat_id, ') sent a ', content_type)
+                    try:
+                        print('[Info][',msg['message_id'],']',msg['chat']['username'],'(',chat_id, ') sent a ', content_type)
+                    except:
+                        print('[Info][',chat_id, ' sent a ', content_type)
                     await self.sender.sendMessage('麻煩給我一個阿拉伯數字.')
                     return
-                print('[Info][',msg['message_id'],']',msg['chat']['username'],'(',chat_id, ') :', msg['text'])
+                try:
+                    print('[Info][',msg['message_id'],']',msg['chat']['username'],'(',chat_id, ') :', msg['text'])
+                except:
+                    print('[Info][',msg['message_id'],']',chat_id, ' :', msg['text'])
             else:
                 if content_type != 'text':
-                    print('[Info][',msg['message_id'],'](Reply)',msg['chat']['username'],'(',chat_id, ') sent a ', content_type)
+                    try:
+                        print('[Info][',msg['message_id'],'](Reply)',msg['chat']['username'],'(',chat_id, ') sent a ', content_type)
+                    except:
+                        print('[Info][',msg['message_id'],'](Reply)',chat_id, ' sent a ', content_type)
                     await self.sender.sendMessage('麻煩給我一個阿拉伯數字.')
                     return
-                print('[Info][',msg['message_id'],'](Reply)',msg['chat']['username'],'(',chat_id, ') :', msg['text'])
+                try:
+                    print('[Info][',msg['message_id'],'](Reply)',msg['chat']['username'],'(',chat_id, ') :', msg['text'])
+                except:
+                    print('[Info][',msg['message_id'],'](Reply)',chat_id, ' :', msg['text'])
             if msg['text'] == '/stop':
                 await self.sender.sendMessage('遊戲結束,炸彈是 %d' % self._answer)
                 await self.sender.sendMessage('/start_game')
-                print('[Info]',msg['chat']['username'],'(',chat_id, ') has stopped his game.\n[Info] Game ended.')
+                try:
+                    print('[Info]',msg['chat']['username'],'(',chat_id, ') has stopped his game.\n[Info] Game ended.')
+                except:
+                    print('[Info]',chat_id, ' has stopped his game.\n[Info] Game ended.')
                 self.close()
             try:
                guess = int(msg['text'])
@@ -205,7 +328,10 @@ class Player(telepot.aio.helper.ChatHandler):
                 #await self.sender.sendMessage('Boom!')
                 await self.sender.sendMessage('遊戲結束，您引爆了炸彈')
                 await self.sender.sendMessage('/start_game')
-                print('[Info]',msg['chat']['username'],'(',chat_id, ') has gotten the bomb and exploded.\n[Info] Game ended.')
+                try:
+                    print('[Info]',msg['chat']['username'],'(',chat_id, ') has gotten the bomb and exploded.\n[Info] Game ended.')
+                except:
+                    print('[Info]',chat_id, ' has gotten the bomb and exploded.\n[Info] Game ended.')
                 self.close()
         elif chat_type == 'group' or chat_type == 'supergroup':
             try:
@@ -213,45 +339,81 @@ class Player(telepot.aio.helper.ChatHandler):
             except:
                 if content_type != 'text':
                     if content_type == 'new_chat_member':
-                        print('[Info][',msg['message_id'],'] ',msg['new_chat_member']['username'],' joined a ', chat_type,':',msg['chat']['title'],'(',chat_id,')')
+                        try:
+                            print('[Info][',msg['message_id'],'] ',msg['new_chat_member']['username'],' joined a ', chat_type,':',msg['chat']['title'],'(',chat_id,')')
+                        except:
+                            print('[Info][',msg['message_id'],'] ',msg['new_chat_member']['id'],' joined a ', chat_type,':',msg['chat']['title'],'(',chat_id,')')
                     elif content_type == 'left_chat_member':
                         if msg['left_chat_member']['id'] == bot_me['id']:
-                            print('[Info][',msg['message_id'],'] I have been kicked from ', chat_type,':',msg['chat']['title'],'(',chat_id,') by',msg['from']['username'],'(',msg['from']['id'],')')
+                            try:
+                                print('[Info][',msg['message_id'],'] I have been kicked from ', chat_type,':',msg['chat']['title'],'(',chat_id,') by',msg['from']['username'],'(',msg['from']['id'],')')
+                            except:
+                                print('[Info][',msg['message_id'],'] I have been kicked from ', chat_type,':',msg['chat']['title'],'(',chat_id,') by',msg['from']['id'])
                             print('[Info] Game ended.')
                             self.close()
                         else:
-                            print('[Info][',msg['message_id'],'] ',msg['left_chat_member']['username'],' left the ', chat_type,':',msg['chat']['title'],'(',chat_id,')')
+                            try:
+                                print('[Info][',msg['message_id'],'] ',msg['left_chat_member']['username'],' left the ', chat_type,':',msg['chat']['title'],'(',chat_id,')')
+                            except:
+                                print('[Info][',msg['message_id'],'] ',msg['left_chat_member']['id'],' left the ', chat_type,':',msg['chat']['title'],'(',chat_id,')')
                     else:
-                        print('[Info][',msg['message_id'],']',msg['from']['username'],'(',msg['from']['id'], ') in',msg['chat']['title'],'(',chat_id, ')sent a ', content_type)
+                        try:
+                            print('[Info][',msg['message_id'],']',msg['from']['username'],'(',msg['from']['id'], ') in',msg['chat']['title'],'(',chat_id, ')sent a ', content_type)
+                        except:
+                            print('[Info][',msg['message_id'],']',msg['from']['id'], ' in',msg['chat']['title'],'(',chat_id, ')sent a ', content_type)
                     return
-                print('[Info][',msg['message_id'],']',msg['from']['username'],'(',msg['from']['id'], ') in',msg['chat']['title'],'(',chat_id, ') :',msg['text'])
+                try:
+                    print('[Info][',msg['message_id'],']',msg['from']['username'],'(',msg['from']['id'], ') in',msg['chat']['title'],'(',chat_id, ') :',msg['text'])
+                except:
+                    print('[Info][',msg['message_id'],']',msg['from']['id'], ' in',msg['chat']['title'],'(',chat_id, ') :',msg['text'])
                 if msg['text'] == '/stop' or msg['text'] == '/stop@'+username:
                         await self.sender.sendMessage('遊戲結束,炸彈是 %d' % self._answer,reply_to_message_id= msg['message_id'])
                         await self.sender.sendMessage('/start_game', reply_markup=None)
-                        print('[Info]',msg['from']['username'],'(',msg['from']['id'], ') in',msg['chat']['title'],'(',chat_id, ') has stopped the game.\n[Info] Game ended.')
+                        try:
+                            print('[Info]',msg['from']['username'],'(',msg['from']['id'], ') in',msg['chat']['title'],'(',chat_id, ') has stopped the game.\n[Info] Game ended.')
+                        except:
+                            print('[Info]',msg['from']['id'], ' in',msg['chat']['title'],'(',chat_id, ') has stopped the game.\n[Info] Game ended.')
                         self.close()
             else:
                 if reply_to == bot_me['id']:
                     if content_type != 'text':
                         if content_type == 'new_chat_member':
-                            print('[Info][',msg['message_id'],'] (Reply to me)',msg['new_chat_member']['username'],' joined a ', chat_type,':',msg['chat']['title'],'(',chat_id,')')
+                            try:
+                                print('[Info][',msg['message_id'],'] (Reply to me)',msg['new_chat_member']['username'],' joined a ', chat_type,':',msg['chat']['title'],'(',chat_id,')')
+                            except:
+                                print('[Info][',msg['message_id'],'] (Reply to me)',msg['new_chat_member']['id'],' joined a ', chat_type,':',msg['chat']['title'],'(',chat_id,')')
                         elif content_type == 'left_chat_member':
                             if msg['left_chat_member']['id'] == bot_me['id']:
-                                print('[Info][',msg['message_id'],'] (Reply to me) I have been kicked from ', chat_type,':',msg['chat']['title'],'(',chat_id,') by',msg['from']['username'],'(',msg['from']['id'],')')
+                                try:
+                                    print('[Info][',msg['message_id'],'] (Reply to me) I have been kicked from ', chat_type,':',msg['chat']['title'],'(',chat_id,') by',msg['from']['username'],'(',msg['from']['id'],')')
+                                except:
+                                    print('[Info][',msg['message_id'],'] (Reply to me) I have been kicked from ', chat_type,':',msg['chat']['title'],'(',chat_id,') by',msg['from']['id'])
                                 print('[Info] Game ended.')
                                 self.close()
                             else:
-                                print('[Info][',msg['message_id'],'] (Reply to me) ',msg['left_chat_member']['username'],' left the ', chat_type,':',msg['chat']['title'],'(',chat_id,')')
+                                try:
+                                    print('[Info][',msg['message_id'],'] (Reply to me) ',msg['left_chat_member']['username'],' left the ', chat_type,':',msg['chat']['title'],'(',chat_id,')')
+                                except:
+                                    print('[Info][',msg['message_id'],'] (Reply to me) ',msg['left_chat_member']['id'],' left the ', chat_type,':',msg['chat']['title'],'(',chat_id,')')
                         else:
-                            print('[Info][',msg['message_id'],'] (Reply to me)',msg['from']['username'],'(',msg['from']['id'], ') in',msg['chat']['title'],'(',chat_id, ')sent a ', content_type)
+                            try:
+                                print('[Info][',msg['message_id'],'] (Reply to me)',msg['from']['username'],'(',msg['from']['id'], ') in',msg['chat']['title'],'(',chat_id, ')sent a ', content_type)
+                            except:
+                                print('[Info][',msg['message_id'],'] (Reply to me)',msg['from']['id'], ' in',msg['chat']['title'],'(',chat_id, ')sent a ', content_type)
                             markup = ForceReply()
                             await self.sender.sendMessage('麻煩給我一個阿拉伯數字.',reply_to_message_id= msg['message_id'], reply_markup=markup)
                         return
-                    print('[Info][',msg['message_id'],'] (Reply to me)',msg['from']['username'],'(',msg['from']['id'], ') in',msg['chat']['title'],'(',chat_id, ') :',msg['text'])
+                    try:
+                        print('[Info][',msg['message_id'],'] (Reply to me)',msg['from']['username'],'(',msg['from']['id'], ') in',msg['chat']['title'],'(',chat_id, ') :',msg['text'])
+                    except:
+                        print('[Info][',msg['message_id'],'] (Reply to me)',msg['from']['id'], ' in',msg['chat']['title'],'(',chat_id, ') :',msg['text'])
                     if msg['text'] == '/stop' or msg['text'] == '/stop@'+username:
                         await self.sender.sendMessage('遊戲結束,炸彈是 %d' % self._answer,reply_to_message_id= msg['message_id'])
                         await self.sender.sendMessage('/start_game', reply_markup=None)
-                        print('[Info]',msg['from']['username'],'(',msg['from']['id'], ') in',msg['chat']['title'],'(',chat_id, ') has stopped the game.\n[Info] Game ended.')
+                        try:
+                            print('[Info]',msg['from']['username'],'(',msg['from']['id'], ') in',msg['chat']['title'],'(',chat_id, ') has stopped the game.\n[Info] Game ended.')
+                        except:
+                            print('[Info]',msg['from']['id'], ' in',msg['chat']['title'],'(',chat_id, ') has stopped the game.\n[Info] Game ended.')
                         self.close()
                     try:
                        guess = int(msg['text'])
@@ -271,27 +433,78 @@ class Player(telepot.aio.helper.ChatHandler):
                         #await self.sender.sendMessage('Boom!',reply_to_message_id= msg['message_id'])
                         await self.sender.sendMessage('遊戲結束，您引爆了炸彈',reply_to_message_id= msg['message_id'])
                         await self.sender.sendMessage('/start_game', reply_markup=None)
-                        print('[Info]',msg['from']['username'],'(',msg['from']['id'], ') in',msg['chat']['title'],'(',chat_id, ') has gotten the bomb and exploded.\n[Info] Game ended.')
+                        try:
+                            print('[Info]',msg['from']['username'],'(',msg['from']['id'], ') in',msg['chat']['title'],'(',chat_id, ') has gotten the bomb and exploded.\n[Info] Game ended.')
+                        except:
+                            print('[Info]',msg['from']['id'], ') in',msg['chat']['title'],'(',chat_id, ') has gotten the bomb and exploded.\n[Info] Game ended.')
                         self.close()
                 else:
                     if content_type != 'text':
                         if content_type == 'new_chat_member':
-                            print('[Info][',msg['message_id'],'] (Reply to ',msg['reply_to_message']['from']['username'],')',msg['new_chat_member']['username'],' joined a ', chat_type,':',msg['chat']['title'],'(',chat_id,')')
+                            try:
+                                print('[Info][',msg['message_id'],'] (Reply to ',msg['reply_to_message']['from']['username'],')',msg['new_chat_member']['username'],' joined a ', chat_type,':',msg['chat']['title'],'(',chat_id,')')
+                            except:
+                                try:
+                                    print('[Info][',msg['message_id'],'] (Reply to ',msg['reply_to_message']['from']['id'],')',msg['new_chat_member']['username'],' joined a ', chat_type,':',msg['chat']['title'],'(',chat_id,')')
+                                except:
+                                    try:
+                                        print('[Info][',msg['message_id'],'] (Reply to ',msg['reply_to_message']['from']['username'],')',msg['new_chat_member']['id'],' joined a ', chat_type,':',msg['chat']['title'],'(',chat_id,')')
+                                    except:
+                                        print('[Info][',msg['message_id'],'] (Reply to ',msg['reply_to_message']['from']['id'],')',msg['new_chat_member']['id'],' joined a ', chat_type,':',msg['chat']['title'],'(',chat_id,')')
                         elif content_type == 'left_chat_member':
                             if msg['left_chat_member']['id'] == bot_me['id']:
-                                print('[Info][',msg['message_id'],'] (Reply to ',msg['reply_to_message']['from']['username'],') I have been kicked from ', chat_type,':',msg['chat']['title'],'(',chat_id,') by',msg['from']['username'],'(',msg['from']['id'],')')
+                                try:
+                                    print('[Info][',msg['message_id'],'] (Reply to ',msg['reply_to_message']['from']['username'],') I have been kicked from ', chat_type,':',msg['chat']['title'],'(',chat_id,') by',msg['from']['username'],'(',msg['from']['id'],')')
+                                except:
+                                    try:
+                                        print('[Info][',msg['message_id'],'] (Reply to ',msg['reply_to_message']['from']['id'],') I have been kicked from ', chat_type,':',msg['chat']['title'],'(',chat_id,') by',msg['from']['username'],'(',msg['from']['id'],')')
+                                    except:
+                                        try:
+                                            print('[Info][',msg['message_id'],'] (Reply to ',msg['reply_to_message']['from']['username'],') I have been kicked from ', chat_type,':',msg['chat']['title'],'(',chat_id,') by',msg['from']['id'])
+                                        except:
+                                            print('[Info][',msg['message_id'],'] (Reply to ',msg['reply_to_message']['from']['id'],') I have been kicked from ', chat_type,':',msg['chat']['title'],'(',chat_id,') by',msg['from']['id'])
                                 print('[Info] Game ended.')
                                 self.close()
                             else:
-                                print('[Info][',msg['message_id'],'] (Reply to ',msg['reply_to_message']['from']['username'],') ',msg['left_chat_member']['username'],' left the ', chat_type,':',msg['chat']['title'],'(',chat_id,')')
+                                try:
+                                    print('[Info][',msg['message_id'],'] (Reply to ',msg['reply_to_message']['from']['username'],') ',msg['left_chat_member']['username'],' left the ', chat_type,':',msg['chat']['title'],'(',chat_id,')')
+                                except:
+                                    try:
+                                        print('[Info][',msg['message_id'],'] (Reply to ',msg['reply_to_message']['from']['id'],') ',msg['left_chat_member']['username'],' left the ', chat_type,':',msg['chat']['title'],'(',chat_id,')')
+                                    except:
+                                        try:
+                                            print('[Info][',msg['message_id'],'] (Reply to ',msg['reply_to_message']['from']['username'],') ',msg['left_chat_member']['id'],' left the ', chat_type,':',msg['chat']['title'],'(',chat_id,')')
+                                        except:
+                                            print('[Info][',msg['message_id'],'] (Reply to ',msg['reply_to_message']['from']['id'],') ',msg['left_chat_member']['id'],' left the ', chat_type,':',msg['chat']['title'],'(',chat_id,')')
                         else:
-                            print('[Info][',msg['message_id'],'] (Reply to ',msg['reply_to_message']['from']['username'],')',msg['from']['username'],'(',msg['from']['id'], ') in',msg['chat']['title'],'(',chat_id, ')sent a ', content_type)
+                            try:
+                                print('[Info][',msg['message_id'],'] (Reply to ',msg['reply_to_message']['from']['username'],')',msg['from']['username'],'(',msg['from']['id'], ') in',msg['chat']['title'],'(',chat_id, ')sent a ', content_type)
+                            except:
+                                try:
+                                    print('[Info][',msg['message_id'],'] (Reply to ',msg['reply_to_message']['from']['id'],')',msg['from']['username'],'(',msg['from']['id'], ') in',msg['chat']['title'],'(',chat_id, ')sent a ', content_type)
+                                except:
+                                    try:
+                                        print('[Info][',msg['message_id'],'] (Reply to ',msg['reply_to_message']['from']['username'],')',msg['from']['id'], ' in',msg['chat']['title'],'(',chat_id, ')sent a ', content_type)
+                                    except:
+                                        print('[Info][',msg['message_id'],'] (Reply to ',msg['reply_to_message']['from']['id'],')',msg['from']['id'], ' in',msg['chat']['title'],'(',chat_id, ')sent a ', content_type)
                         return
-                    print('[Info][',msg['message_id'],'] (Reply to ',msg['reply_to_message']['from']['username'],')',msg['from']['username'],'(',msg['from']['id'], ') in',msg['chat']['title'],'(',chat_id, ') :',msg['text'])
+                    try:
+                        print('[Info][',msg['message_id'],'] (Reply to ',msg['reply_to_message']['from']['username'],')',msg['from']['username'],'(',msg['from']['id'], ') in',msg['chat']['title'],'(',chat_id, ') :',msg['text'])
+                    except:
+                        try:
+                            print('[Info][',msg['message_id'],'] (Reply to ',msg['reply_to_message']['from']['id'],')',msg['from']['username'],'(',msg['from']['id'], ') in',msg['chat']['title'],'(',chat_id, ') :',msg['text'])
+                        except:
+                            try:
+                                print('[Info][',msg['message_id'],'] (Reply to ',msg['reply_to_message']['from']['username'],')',msg['from']['id'], ' in',msg['chat']['title'],'(',chat_id, ') :',msg['text'])
+                            except:
+                                print('[Info][',msg['message_id'],'] (Reply to ',msg['reply_to_message']['from']['id'],')',msg['from']['id'], ' in',msg['chat']['title'],'(',chat_id, ') :',msg['text'])
                     if msg['text'] == '/stop' or msg['text'] == '/stop@'+username:
                         await self.sender.sendMessage('遊戲結束,炸彈是 %d' % self._answer,reply_to_message_id= msg['message_id'])
                         await self.sender.sendMessage('/start_game', reply_markup=None)
-                        print('[Info]',msg['from']['username'],'(',msg['from']['id'], ') in',msg['chat']['title'],'(',chat_id, ') has stopped the game.\n[Info] Game ended.')
+                        try:
+                            print('[Info]',msg['from']['username'],'(',msg['from']['id'], ') in',msg['chat']['title'],'(',chat_id, ') has stopped the game.\n[Info] Game ended.')
+                        except:
+                            print('[Info]',msg['from']['id'], ' in',msg['chat']['title'],'(',chat_id, ') has stopped the game.\n[Info] Game ended.')
                         self.close()
     async def on__idle(self, event):
         await self.sender.sendMessage('時間到. 炸彈是 %d' % self._answer)
