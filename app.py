@@ -524,6 +524,7 @@ bot = telepot.aio.DelegatorBot(TOKEN, [
 
 loop = asyncio.get_event_loop()
 loop.create_task(bot.message_loop())
-print('Listening ...')
+print('[Info] Bot has started')
+print('[Info] Listening ...')
 
 loop.run_forever()
