@@ -11,7 +11,7 @@
 
   For Windows: Go to 'python folder'\Scripts\ Shift+right_click to open Command Shell here and type "pip install telepot".
   
-4.Edit app.py,Insert your bot's TOKEN to the currect position.
+4.Edit config.json
 
 5.Start the python app and enjoy!
 
