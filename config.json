@@ -1,5 +1,5 @@
 {
     "TOKEN":"", #Insert your telegram bot token here.
-	"Timeout":20, #Set timeout of the game.
+    "Timeout":20, #Set timeout of the game.
     "Debug" : False #If True,raw debug info will be logged into -debug.log file
 }
