@@ -38,14 +38,14 @@ class Player(telepot.aio.helper.ChatHandler):
 
     def _hint(self, answer, guess, cmin, cmax):
         if answer > guess:
-            if cmin > guess:
-                return '請給我'+str(self._cmin)+' - '+str(self._cmax)+'的數字'
+            if cmin >= guess:
+                return '請給我'+str(self._cmin)+' - '+str(self._cmax)+'之間的數字'
             else:
                 self._cmin = guess
                 return str(self._cmin)+' - '+str(self._cmax)
         else:
-            if cmax < guess:
-                return '請給我'+str(self._cmin)+' - '+str(self._cmax)+'的數字'
+            if cmax <= guess:
+                return '請給我'+str(self._cmin)+' - '+str(self._cmax)+'之間的數字'
             else:
                 self._cmax = guess
                 return str(self._cmin)+' - '+str(self._cmax)
