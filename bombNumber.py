@@ -585,6 +585,11 @@ class Player(telepot.aio.helper.ChatHandler):
                         dre = await self.sender.sendMessage(hint,reply_to_message_id= msg['message_id'], reply_markup=markup)
                         log("[Debug] Raw sent data:"+str(dre))
                     else:
+                        markup = ForceReply()
+                        dre = await self.sender.sendMessage(self._answer, reply_markup=markup)
+                        log("[Debug] Raw sent data:"+str(dre))
+                        msg_idf = telepot.message_identifier(dre)
+                        await bot.deleteMessage(msg_idf)
                         dre = await self.sender.sendDocument('http://i.imgur.com/vjrcTIy.gif', caption='Boom!',reply_to_message_id= msg['message_id'])
                         log("[Debug] Raw sent data:"+str(dre))
                         dre = await self.sender.sendMessage('遊戲結束，您引爆了炸彈',reply_to_message_id= msg['message_id'])
