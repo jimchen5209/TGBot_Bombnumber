@@ -543,6 +543,11 @@ class Player(telepot.aio.helper.ChatHandler):
                             self.close()
                 else:
                     if msg['text'] == '/stop' or msg['text'] == '/stop@'+username:
+                        markup = ForceReply()
+                        dre = await self.sender.sendMessage(self._answer, reply_markup=markup)
+                        log("[Debug] Raw sent data:"+str(dre))
+                        msg_idf = telepot.message_identifier(dre)
+                        await bot.deleteMessage(msg_idf)
                         dre = await self.sender.sendMessage('遊戲結束,炸彈是 %d' % self._answer,reply_to_message_id= msg['message_id'])
                         log("[Debug] Raw sent data:"+str(dre))
                         dre = await self.sender.sendMessage('/start_game', reply_markup=None)
@@ -563,6 +568,11 @@ class Player(telepot.aio.helper.ChatHandler):
                             log("[Debug] Raw sent data:"+str(dre))
                         return
                     if msg['text'] == '/stop' or msg['text'] == '/stop@'+username:
+                        markup = ForceReply()
+                        dre = await self.sender.sendMessage(self._answer, reply_markup=markup)
+                        log("[Debug] Raw sent data:"+str(dre))
+                        msg_idf = telepot.message_identifier(dre)
+                        await bot.deleteMessage(msg_idf)
                         dre = await self.sender.sendMessage('遊戲結束,炸彈是 %d' % self._answer,reply_to_message_id= msg['message_id'])
                         log("[Debug] Raw sent data:"+str(dre))
                         dre = await self.sender.sendMessage('/start_game', reply_markup=None)
@@ -601,6 +611,11 @@ class Player(telepot.aio.helper.ChatHandler):
                 else:
                     if content_type == 'text':
                         if msg['text'] == '/stop' or msg['text'] == '/stop@'+username:
+                            markup = ForceReply()
+                            dre = await self.sender.sendMessage(self._answer, reply_markup=markup)
+                            log("[Debug] Raw sent data:"+str(dre))
+                            msg_idf = telepot.message_identifier(dre)
+                            await bot.deleteMessage(msg_idf)
                             dre = await self.sender.sendMessage('遊戲結束,炸彈是 %d' % self._answer,reply_to_message_id= msg['message_id'])
                             log("[Debug] Raw sent data:"+str(dre))
                             dre = await self.sender.sendMessage('/start_game', reply_markup=None)
