@@ -61,7 +61,7 @@ class Player(telepot.aio.helper.ChatHandler):
         try:
             dlog = dlog+"[EDITED"+str(msg['edit_date'])+"]"
         except:
-            time.sleep(0)
+            pass
         try:
             fuser = await bot.getChatMember(chat_id, msg['from']['id'])
         except:
@@ -311,7 +311,7 @@ class Player(telepot.aio.helper.ChatHandler):
             print('[EDIT]['+str(initial_msg['edit_date'])+']:'+\
                 str(initial_msg['message_id'])+'-->'+initial_msg['text'])
         except:
-            time.sleep(0)
+            pass
         else:
             self.close()
             return
@@ -571,7 +571,7 @@ class Player(telepot.aio.helper.ChatHandler):
             ' has expired.\n[Info] Game ended.')
         self.close()
     async def on_close(self, chat_id):
-        time.sleep(0)
+        pass
 
 def clog(text):
     print(text)
