@@ -10,6 +10,8 @@ from telepot.aio.delegate import per_chat_id, create_open, pave_event_space
 from telepot.aio.loop import MessageLoop
 from telepot.namedtuple import ForceReply
 
+from status.status import Status
+
 """
 $ python3.5 guessa.py <token>
 """
@@ -613,5 +615,10 @@ loop = asyncio.get_event_loop()
 loop.create_task(MessageLoop(bot).run_forever())
 clog("[" + time.strftime("%Y/%m/%d-%H:%M:%S").replace("'", "") + "][Info] Bot has started")
 clog("[" + time.strftime("%Y/%m/%d-%H:%M:%S").replace("'", "") + "][Info] Listening ...")
-
-loop.run_forever()
+status = Status("BombNumber")
+status.set_status()
+try:
+    loop.run_forever()
+except KeyboardInterrupt:
+    clog("[" + time.strftime("%Y/%m/%d-%H:%M:%S").replace("'", "") + "][Info] Closing")
+    status.set_status(True)
